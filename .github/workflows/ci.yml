@@ -1,0 +1,30 @@
+name: CI Demo PNPh
+
+
+run-name: Event triggerred by @${{ github.actor }} for each push
+on:
+  push:
+
+jobs:
+  test-java-junit:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+
+  #  checkstyle:
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - uses: actions/checkout@v6
+  #      - uses: dbelyaev/action-checkstyle@v3
+
+  steps:
+  - uses: actions/setup-java@v5
+    with:
+      distribution: 'temurin' # See 'Supported distributions' for available options
+      java-version: '21'
+
+  - name: Checkout
+    id: checkout
+    uses: actions/checkout@v6
+
+
+
