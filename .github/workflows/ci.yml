@@ -20,6 +20,9 @@ jobs:
           java-version: '21'
           cache: 'maven' # Optionnel : remplace par 'gradle' si besoin pour gagner du temps
 
+      - name: Run Tests with Maven
+        run: mvn test
+
       # Ajoute ici ta commande de test, par exemple :
       # - name: Run tests
       #   run: mvn test
