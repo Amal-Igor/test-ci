@@ -1,28 +1,28 @@
 name: CI Demo PNPh
+env:
+  JAVA_VERSION: '21' # On centralise ici
 
-run-name: Event triggered by @${{ github.actor }} for each push
-on:
-  push:
+on: [push]
 
 jobs:
-  test-java-junit:
-    name: Unit Tests
+  linter:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout le code
-        uses: actions/checkout@v4
-
-      - name: Configuration de Java 21
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
-          java-version: '21'
-          cache: 'maven' # Optionnel : remplace par 'gradle' si besoin pour gagner du temps
+          java-version: ${{ env.JAVA_VERSION }} # On utilise la variable
+          cache: 'maven'
+      - run: mvn checkstyle:check
 
-      - name: Run Tests with Maven
-        run: mvn test
-
-      # Ajoute ici ta commande de test, par exemple :
-      # - name: Run tests
-      #   run: mvn test
+  test-java-junit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }} # On la réutilise ici
+          cache: 'maven'
+      - run: mvn test -Dcheckstyle.skip
