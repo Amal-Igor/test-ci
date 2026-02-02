@@ -1,7 +1,6 @@
 name: CI Demo PNPh
 
-
-run-name: Event triggerred by @${{ github.actor }} for each push
+run-name: Event triggered by @${{ github.actor }} for each push
 on:
   push:
 
@@ -10,21 +9,17 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-latest
 
-  #  checkstyle:
-  #    runs-on: ubuntu-latest
-  #    steps:
-  #      - uses: actions/checkout@v6
-  #      - uses: dbelyaev/action-checkstyle@v3
+    steps:
+      - name: Checkout le code
+        uses: actions/checkout@v4
 
-  steps:
-  - uses: actions/setup-java@v5
-    with:
-      distribution: 'temurin' # See 'Supported distributions' for available options
-      java-version: '21'
+      - name: Configuration de Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven' # Optionnel : remplace par 'gradle' si besoin pour gagner du temps
 
-  - name: Checkout
-    id: checkout
-    uses: actions/checkout@v6
-
-
-
+      # Ajoute ici ta commande de test, par exemple :
+      # - name: Run tests
+      #   run: mvn test
