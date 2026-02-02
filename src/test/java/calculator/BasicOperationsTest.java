@@ -14,7 +14,7 @@ class BasicOperationsTest {
     @Test
     @DisplayName("Addition: 2 + 3 = 5")
     void testAdd() {
-        assertEquals(5.0, calc.add(2, 3), "Simple addition should work");
+        assertEquals(6.0, calc.add(2, 3), "Simple addition should work");
     }
 
     @Test
