@@ -8,7 +8,6 @@ public class BasicOperations {
         return a + b;
     }
 
-    @SuppressWarnings({"checkstyle:Indentation", "checkstyle:MissingJavadocMethod"})
     public double subtract(double a, double b) {
         return a - b;
     }
